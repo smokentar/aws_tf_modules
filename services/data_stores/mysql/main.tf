@@ -22,7 +22,7 @@ resource "aws_db_instance" "initial_db" {
 
   skip_final_snapshot = true
 
-  dynamic "tags" {
+  dynamic "tag" {
     for_each = local.standard_tags
 
     content {
