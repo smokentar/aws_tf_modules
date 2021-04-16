@@ -18,7 +18,7 @@ locals {
   not_found = "404"
   success = "200"
 
-
+  # Standardised tags which are required
   standard_tags = {
     Name = var.cluster_name
     Environment = "Staging"
