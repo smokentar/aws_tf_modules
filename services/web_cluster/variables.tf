@@ -1,19 +1,3 @@
-/* #delete if works
-variable "server_port" {
-  description = "The port the server will use for HTTP requests"
-  type = number
-  default = 8080
-}
-variable "alb_http_port" {
-  description = "HTTP port for ALB"
-  default = 80
-}
-variable "not_found" {
-  description = "404: resource not found"
-  default = 404
-}
-*/
-
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
   type = string
@@ -42,4 +26,10 @@ variable "min_size_asg" {
 variable "max_size_asg" {
   description = "The maximum number of EC2 instances in the ASG"
   type = number
+}
+
+variable "custom_tags" {
+  description = "Custom tags to set on the instances in the ASG"
+  type = map(string)
+  default = {}
 }
