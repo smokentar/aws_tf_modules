@@ -28,8 +28,29 @@ variable "max_size_asg" {
   type = number
 }
 
+variable "standard_tags" {
+  description = "Standard tags propagated to instances launched by the ASG"
+  default = [
+  {
+    key = "Name"
+    value = "${var.cluster_name}"
+    propagate_at_launch = true
+  },
+  {
+  key = "Environment"
+  value = "Staging"
+  propagate_at_launch = true
+  },
+  {
+  key = "IAC"
+  value = "terraform"
+  propagate_at_launch = true
+  }
+  ]
+}
+
 variable "custom_tags" {
-  description = "Custom tags to set on the instances in the ASG"
+  description = "Custom tags propagated to instances launched by the ASG"
   type = map(string)
   default = {}
 }
