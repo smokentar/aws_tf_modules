@@ -53,8 +53,6 @@ resource "aws_autoscaling_group" "initial_asg" {
   min_size = var.min_size_asg
   max_size = var.max_size_asg
 
-  tags = var.standard_tags
-
   dynamic "tag" {
     for_each = var.standard_tags
 
