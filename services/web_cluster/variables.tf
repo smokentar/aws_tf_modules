@@ -50,15 +50,6 @@ variable "standard_tags" {
 }
 */
 
-variable "standard_tags" {
-  description = "Standard tags propagated to instances launched by the ASG"
-  type = map(string)
-  default = {
-    Name = "${var.cluster_name}"
-    Environment = "Staging"
-    IAC = "terraform"
-  }
-
 variable "custom_tags" {
   description = "Custom tags propagated to instances launched by the ASG"
   type = map(string)
