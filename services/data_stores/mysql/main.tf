@@ -22,13 +22,5 @@ resource "aws_db_instance" "initial_db" {
 
   skip_final_snapshot = true
 
-  dynamic "tag" {
-    for_each = local.standard_tags
-
-    content {
-      key = tag.key
-      value = tag.value
-      propagate_at_launch = true
-    }
-  }
+  tags = local.standard_tags
 }
