@@ -21,7 +21,6 @@ locals {
   # Standardised tags which are required
   standard_tags = {
     Name = var.cluster_name
-    Environment = "Staging"
     IAC = "terraform"
   }
 }
