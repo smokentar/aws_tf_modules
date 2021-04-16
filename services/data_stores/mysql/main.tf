@@ -21,4 +21,14 @@ resource "aws_db_instance" "initial_db" {
   password = data.aws_ssm_parameter.initial-db-pw.value
 
   skip_final_snapshot = true
+
+  dynamic "tags" {
+    for_each = local.standard_tags
+
+    content {
+      key = tag.key
+      value = tag.value
+      propagate_at_launch = true
+    }
+  }
 }
