@@ -20,8 +20,8 @@ locals {
 
 
   standard_tags = {
-      Name = "${var.cluster_name}"
-      Environment = "Staging"
-      IAC = "terraform"
-    }
+    Name = var.cluster_name
+    Environment = "Staging"
+    IAC = "terraform"
+  }
 }
