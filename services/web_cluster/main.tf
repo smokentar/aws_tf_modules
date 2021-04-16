@@ -53,25 +53,6 @@ resource "aws_autoscaling_group" "initial_asg" {
   min_size = var.min_size_asg
   max_size = var.max_size_asg
 
-  tag {
-    key = "Name"
-    value = "${var.cluster_name}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key = "Environment"
-    value = "Staging"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key = "IAC"
-    value = "terraform"
-    propagate_at_launch = true
-  }
-/*
-  # Two dynamic tag entries are not working  - investigate
   dynamic "tag" {
     for_each = local.standard_tags
 
@@ -81,7 +62,7 @@ resource "aws_autoscaling_group" "initial_asg" {
       propagate_at_launch = true
     }
   }
-*/
+
   dynamic "tag" {
     for_each = var.custom_tags
 
