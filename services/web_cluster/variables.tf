@@ -27,7 +27,7 @@ variable "max_size_asg" {
   description = "The maximum number of EC2 instances in the ASG"
   type = number
 }
-
+/*
 variable "standard_tags" {
   description = "Standard tags propagated to instances launched by the ASG"
   default = [
@@ -48,6 +48,16 @@ variable "standard_tags" {
   }
   ]
 }
+*/
+
+variable "standard_tags" {
+  description = "Standard tags propagated to instances launched by the ASG"
+  type = map(string)
+  default = {
+    Name = "${var.cluster_name}"
+    Environment = "Staging"
+    IAC = "terraform"
+  }
 
 variable "custom_tags" {
   description = "Custom tags propagated to instances launched by the ASG"
