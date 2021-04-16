@@ -18,12 +18,10 @@ locals {
   not_found = "404"
   success = "200"
 
-/*
+
   standard_tags = {
     Name = var.cluster_name
     Environment = "Staging"
     IAC = "terraform"
   }
-*/
-
 }
