@@ -13,7 +13,9 @@ Changes to module templates should follow a standard procedure:
 2. Create a new branch for editing
 <br /> `git checkout -b "example-edit"`
 3. Create a PR to review and merge the `example-edit` branch to `staging`
-4. Test the changes introduced to staging  in [aws_tf_infra_v1](https://github.com/smokentar/aws_tf_infra_v1)
-5. Create a PR to review and merge the `example-edit` branch to `master`
-6. Deploy the changes to prod in [aws_tf_infra_v1](https://github.com/smokentar/aws_tf_infra_v1)
-7. Delete the local and remote `example-edit` branch 
+4. Post merge, ensure terraform branch reference is updated: `terraform get -update`
+5. Test the changes introduced to staging  in [aws_tf_infra_v1](https://github.com/smokentar/aws_tf_infra_v1)
+6. Create a PR to review and merge the `example-edit` branch to `master`
+7. Post merge, ensure terraform branch reference is updated: `terraform get -update`
+8. Deploy the changes to prod in [aws_tf_infra_v1](https://github.com/smokentar/aws_tf_infra_v1)
+9. Delete the local and remote `example-edit` branch 
