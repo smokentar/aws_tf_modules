@@ -83,7 +83,7 @@ resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
   desired_capacity = 10
   recurrence = "0 9 * * *"
 
-  autoscaling_group_name = module.web-cluster.asg_name
+  autoscaling_group_name = aws_autoscaling_group.initial_asg.name
 }
 
 resource "aws_autoscaling_schedule" "scale_in_after_business_hours" {
@@ -95,7 +95,7 @@ resource "aws_autoscaling_schedule" "scale_in_after_business_hours" {
   desired_capacity = 2
   recurrence = "0 17 * * *"
 
-  autoscaling_group_name = module.web-cluster.asg_name
+  autoscaling_group_name = aws_autoscaling_group.initial_asg.name
 }
 
 resource "aws_cloudwatch_metric_alarm" "high_cpu" {
@@ -126,7 +126,7 @@ resource "aws_cloudwatch_metric_alarm" "low_cpu_credit" {
     AutoScalingGroupName = aws_autoscaling_group.initial_asg .name
   }
 
-  comparison_operator = "LowerThanThreshold"
+  comparison_operator = "LessThanThreshold"
   evaluation_periods = 1
   period = 300
   statistic = "Minimum"
