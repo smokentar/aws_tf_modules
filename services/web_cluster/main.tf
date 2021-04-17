@@ -53,10 +53,24 @@ resource "aws_autoscaling_group" "initial_asg" {
   min_size = var.min_size_asg
   max_size = var.max_size_asg
 
-  tag {
-    key = "Name"
-    value = "${var.cluster_name}-mng-by-asg"
-    propagate_at_launch = true
+  dynamic "tag" {
+    for_each = local.standard_tags
+
+    content {
+      key = tag.key
+      value = tag.value
+      propagate_at_launch = true
+    }
+  }
+
+  dynamic "tag" {
+    for_each = var.custom_tags
+
+    content {
+      key = tag.key
+      value = tag.value
+      propagate_at_launch = true
+    }
   }
 }
 

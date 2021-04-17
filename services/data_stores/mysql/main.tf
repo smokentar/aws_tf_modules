@@ -21,4 +21,6 @@ resource "aws_db_instance" "initial_db" {
   password = data.aws_ssm_parameter.initial-db-pw.value
 
   skip_final_snapshot = true
+
+  tags = merge(local.standard_tags, var.custom_tags)
 }
