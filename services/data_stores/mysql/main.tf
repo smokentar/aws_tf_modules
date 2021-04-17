@@ -22,5 +22,5 @@ resource "aws_db_instance" "initial_db" {
 
   skip_final_snapshot = true
 
-  tags = local.standard_tags
+  tags = var.custom_tags
 }
