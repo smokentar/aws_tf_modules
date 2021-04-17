@@ -74,6 +74,66 @@ resource "aws_autoscaling_group" "initial_asg" {
   }
 }
 
+resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
+  count = var.scheduled_actions ? 1 : 0
+
+  scheduled_action_name = "scale-out-during-business-hours"
+  min_size = 2
+  max_size = 10
+  desired_capacity = 10
+  recurrence = "0 9 * * *"
+
+  autoscaling_group_name = module.web-cluster.asg_name
+}
+
+resource "aws_autoscaling_schedule" "scale_in_after_business_hours" {
+  count = var.scheduled_actions ? 1 : 0
+
+  scheduled_action_name = "scale-in-after-business-hours"
+  min_size = 2
+  max_size = 10
+  desired_capacity = 2
+  recurrence = "0 17 * * *"
+
+  autoscaling_group_name = module.web-cluster.asg_name
+}
+
+resource "aws_cloudwatch_metric_alarm" "high_cpu" {
+  alarm_name = "${var.cluster_name}-high-cpu"
+  namespace = "AWS/EC2"
+  metric_name = "CPUUtilization"
+
+  dimensions = {
+    AutoScalingGroupName = aws_autoscaling_group.initial_asg.name
+  }
+
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods = 1
+  period = 300
+  statistic = "Average"
+  threshold = 90
+  unit = "Percent"
+}
+
+resource "aws_cloudwatch_metric_alarm" "low_cpu_credit" {
+  count = format("%.1s", var.instance_type) == "t" ? 1 : 0
+
+  alarm_name ="${var.cluster_name}-low-cpu-credit"
+  namespace = "AWS/EC2"
+  metric_name = "CPUCreditBalance"
+
+  dimenstions = {
+    AutoScalingGroupName = aws_autoscaling_group.initial_asg .name
+  }
+
+  comparison_operator = "LowerThanThreshold"
+  evaluation_periods = 1
+  period = 300
+  statistic = "Minimum"
+  threshold = 10
+  unit = "Count"
+}
+
 resource "aws_security_group" "initial_sg" {
   name = "${var.cluster_name}-sg"
 }

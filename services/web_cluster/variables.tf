@@ -33,3 +33,8 @@ variable "custom_tags" {
   type = map(string)
   default = {}
 }
+
+variable "scheduled_actions" {
+  description = "Enables or disables ASG scheduled actions"
+  type = bool
+}
