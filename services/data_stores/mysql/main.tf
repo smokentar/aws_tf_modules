@@ -22,5 +22,5 @@ resource "aws_db_instance" "initial_db" {
 
   skip_final_snapshot = true
 
-  tags = "${merge(local.standard_tags, var.custom_tags)}"
+  tags = merge(local.standard_tags, var.custom_tags)
 }
