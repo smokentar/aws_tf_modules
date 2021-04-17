@@ -122,7 +122,7 @@ resource "aws_cloudwatch_metric_alarm" "low_cpu_credit" {
   namespace = "AWS/EC2"
   metric_name = "CPUCreditBalance"
 
-  dimenstions = {
+  dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.initial_asg .name
   }
 
