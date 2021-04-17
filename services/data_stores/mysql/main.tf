@@ -22,13 +22,5 @@ resource "aws_db_instance" "initial_db" {
 
   skip_final_snapshot = true
 
-  tags = concat(
-    [
-      {
-        "key" = "IAC"
-        "value" = "terraform"
-      }
-    ],
-    var.custom_tags
-  )
+  tags = concat({local.standard_tags}, {var.custom_tags})
 }
