@@ -38,3 +38,8 @@ variable "scheduled_actions" {
   description = "Enables or disables ASG scheduled actions"
   type = bool
 }
+
+variable "live_ami" {
+  description = "The AMI used by the initial LC "
+  type = string
+}
