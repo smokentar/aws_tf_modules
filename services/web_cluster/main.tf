@@ -31,7 +31,7 @@ data "template_file" "user_data" {
 
 resource "aws_launch_configuration" "initial" {
   name_prefix = "${var.cluster_name}-lc-"
-  image_id = "ami-013f17f36f8b1fefb"
+  image_id = live_ami
   instance_type = var.instance_type
   security_groups = [aws_security_group.initial_sg.id]
 
