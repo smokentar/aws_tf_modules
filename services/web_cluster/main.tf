@@ -43,7 +43,8 @@ resource "aws_launch_configuration" "initial" {
 }
 
 resource "aws_autoscaling_group" "initial_asg" {
-  name = "${var.cluster_name}-asg"
+  # Ensure this ASG depends on the LC's name to enforce replacement
+  name = "${var.cluster_name}-${aws_launch_configuration.initial.name}"
   launch_configuration = aws_launch_configuration.initial.name
   vpc_zone_identifier = data.aws_subnet_ids.default.ids
 
@@ -52,6 +53,14 @@ resource "aws_autoscaling_group" "initial_asg" {
 
   min_size = var.min_size_asg
   max_size = var.max_size_asg
+
+  # Stand by for a number of instances to pass health checks before promoting the new ASG
+  min_elb_capacity = var.min_size_asg
+
+  # Create a new ASG, promote and delete old ASG
+  lifecycle {
+    create_before_destroy = true
+  }
 
   dynamic "tag" {
     for_each = local.standard_tags
