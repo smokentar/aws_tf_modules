@@ -1,10 +1,10 @@
 #!bin/bash
 
-os_release = $(lsb_release -a)
+os_release="$(lsb_release -d)"
 
 cat > /home/ubuntu/index.html <<EOF
 <h1>Hello, Ubuntu!</h1>
-<p> Env: ${os_release}</p>
+<p>$os_release</p>
 <br>
 <p>DB Address: ${db_address}</p>
 <p>DB port: ${db_port}</p>
