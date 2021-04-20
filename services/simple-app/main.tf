@@ -24,13 +24,13 @@ module "asg" {
   source = "../../clustering/asg-rolling-deploy"
 
   cluster_name = "simple-app-${var.cluster_name}"
-  ami = var.live_ami
+  live_ami = var.live_ami
   user_data = data.template_file.user_data.rendered
   instance_type = var.instance_type
 
-  min_size = var.min_size_asg
-  max_size = var.max_size_asg
-  enable_autoscaling = var.scheduled_actions
+  min_size_asg = var.min_size_asg
+  max_size_asg = var.max_size_asg
+  scheduled_actions = var.scheduled_actions
 
   subnet_ids = data.aws_subnet_ids.default.ids
   target_group_arns = [aws_lb_target_group.asg.arn]
