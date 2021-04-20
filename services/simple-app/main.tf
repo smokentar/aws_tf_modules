@@ -23,7 +23,7 @@ data "terraform_remote_state" "db" {
 module "asg" {
   source = "../../clustering/asg-rolling-deploy"
 
-  cluster_name = "simple-app-${var.environment}"
+  cluster_name = "simple-app-${var.cluster_name}"
   ami = var.live_ami
   user_data = data.template_file.user_data.rendered
   instance_type = var.instance_type
@@ -51,7 +51,7 @@ data "template_file" "user_data" {
 module "alb" {
   source = "../../networking/alb"
 
-  alb_name = "simple-app-${var.environment}"
+  alb_name = "simple-app-${var.cluster_name}"
   subnet_ids = data.aws_subnet_ids.default.ids
 }
 
@@ -72,7 +72,7 @@ resource "aws_lb_listener_rule" "http_forward_tg" {
 }
 
 resource "aws_lb_target_group" "alb_tg" {
-  name = "simple-app-${var.environment}"
+  name = "simple-app-${var.cluster_name}"
   port = local.http_port_non_privilege
   protocol = local.http_protocol
   vpc_id = data.aws_vpc.default.id
