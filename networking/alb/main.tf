@@ -1,7 +1,7 @@
 resource "aws_lb" "initial_alb" {
   name = var.alb_name
   load_balancer_type = "application"
-  subnets = data.aws_subnet_ids.default.ids
+  subnets = var.subnet_ids
   security_groups = [aws_security_group.alb_sg.id]
 }
 
