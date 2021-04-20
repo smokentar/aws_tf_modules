@@ -8,11 +8,6 @@ variable "db_remote_state_key" {
   type = string
 }
 
-variable "environment" {
-  description = "The name of the environment deploying to"
-  type = string
-}
-
 variable "live_ami" {
   description = "The AMI used by the initial LC"
   type = string
