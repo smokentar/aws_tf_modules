@@ -10,5 +10,5 @@ output "alb_http_listener_arn" {
 
 output "alb_security_group_id" {
   description = "The ID of the ALB SG"
-  value = aws_security_group.alb.id
+  value = aws_security_group.alb_sg.id
 }

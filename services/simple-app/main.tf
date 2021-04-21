@@ -33,7 +33,7 @@ module "asg" {
   scheduled_actions = var.scheduled_actions
 
   subnet_ids = data.aws_subnet_ids.default.ids
-  target_group_arns = [aws_lb_target_group.asg.arn]
+  target_group_arns = [aws_lb_target_group.alb_tg.arn]
   health_check_type = "ELB"
 
   custom_tags = var.custom_tags
