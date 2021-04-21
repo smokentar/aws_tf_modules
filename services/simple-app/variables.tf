@@ -1,8 +1,3 @@
-variable "cluster_name" {
-  description = "The name to use for all the cluster resources"
-  type = string
-}
-
 variable "db_remote_state_bucket" {
   description = "The name of the S3 bucket for the database's remote state"
   type = string
@@ -13,13 +8,24 @@ variable "db_remote_state_key" {
   type = string
 }
 
+variable "live_ami" {
+  description = "The AMI used by the initial LC"
+  type = string
+}
+
+# Unsure if we need these here
+variable "cluster_name" {
+  description = "The name to use for all the cluster resources"
+  type = string
+}
+
 variable "instance_type" {
   description = "The type of EC2 instances to run"
   type = string
 }
 
 variable "min_size_asg" {
-  description = "he minimum number of EC2 instances in the ASG"
+  description = "The minimum number of EC2 instances in the ASG"
   type = number
 }
 
@@ -37,9 +43,4 @@ variable "custom_tags" {
 variable "scheduled_actions" {
   description = "Enables or disables ASG scheduled actions"
   type = bool
-}
-
-variable "live_ami" {
-  description = "The AMI used by the initial LC "
-  type = string
 }
