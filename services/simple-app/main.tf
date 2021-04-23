@@ -10,8 +10,8 @@ data "terraform_remote_state" "db" {
   backend = "s3"
 
   config = {
-    bucket = var.db_remote_state_bucket #"terraform-state-20210408203821569800000001"
-    key = var.db_remote_state_key #"staging/services/data_stores/mysql/terraform.tfstate"
+    bucket = var.db_remote_state_bucket
+    key = var.db_remote_state_key
     region = "us-east-1"
   }
 }
@@ -36,7 +36,7 @@ module "asg" {
 }
 
 data "template_file" "user_data" {
-  template = file("${path.module}/user-data.sh") #file("../../../Modules/services/web_cluster/user-data.sh")
+  template = file("${path.module}/user-data.sh")
   vars = {
     user_data_server_port = local.http_port_non_privilege
     db_address = data.terraform_remote_state.db.outputs.mysql_export.endpoint

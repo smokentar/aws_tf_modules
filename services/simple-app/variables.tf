@@ -13,7 +13,6 @@ variable "live_ami" {
   type = string
 }
 
-# Unsure if we need these here
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
   type = string
