@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 data "aws_vpc" "default" {
   default = true
 }
@@ -87,13 +83,3 @@ resource "aws_lb_target_group" "alb_tg" {
     unhealthy_threshold = "3"
   }
 }
-
-#Commented out to test
-/*
-terraform {
-  # Partial config; pulls data from backend.hcl
-  backend "s3" {
-    key = "staging/services/web-cluster/terraform.tfstate"
-  }
-}
-*/
