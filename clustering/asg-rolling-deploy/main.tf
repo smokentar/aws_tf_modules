@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 resource "aws_launch_configuration" "initial" {
   name_prefix = "${var.cluster_name}-lc-"
   image_id = var.live_ami

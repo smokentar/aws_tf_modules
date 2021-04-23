@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 data "aws_ssm_parameter" "initial-db-pw" {
   name = "initial-db-password"
 }
