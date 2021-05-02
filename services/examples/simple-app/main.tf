@@ -6,7 +6,10 @@ module "web_cluster" {
   # This cluster will host a simple app
   source = "github.com/smokentar/aws_tf_modules//services/simple-app?ref=staging"
 
-  # Pass in staging-specific variables
+  # Pass in name of alb to allow parallel testing based on conditional var in simple-app
+  alb_name = var.alb_name
+
+  # Pass in example-specific variables
   cluster_name = "web-example"
   live_ami = "ami-013f17f36f8b1fefb"
 
