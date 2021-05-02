@@ -46,11 +46,6 @@ variable "scheduled_actions" {
   type = bool
 }
 
-variable "alb_name" {
-  description = "The name to use for the ALB"
-  type = string
-}
-
 # Optional input vars, used for dependency injections on example tests
 
 variable "vpc_id" {
