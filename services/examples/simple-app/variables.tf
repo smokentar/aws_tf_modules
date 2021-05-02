@@ -11,3 +11,9 @@ variable "mysql_config" {
     port = "12345"
   }
 }
+
+variable "alb_name" {
+  description = "The IDs fo the subnets to deploy into"
+  type = string
+  default = null
+}

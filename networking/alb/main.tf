@@ -1,5 +1,5 @@
 resource "aws_lb" "initial_alb" {
-  name_prefix = var.alb_name
+  name = var.alb_name
   load_balancer_type = "application"
   subnets = var.subnet_ids
   security_groups = [aws_security_group.alb_sg.id]
