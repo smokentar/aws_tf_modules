@@ -10,13 +10,13 @@ import (
   "strings"
 )
 
-func TestSimpleAppExample (t *testing.T) {
+func TestSimpleAppMockDbExample(t *testing.T) {
 
   // Unique ID passed to resource names to avoid parallel test clashing
   uniqueId := random.UniqueId()
 
   terraformOptions := &terraform.Options {
-    TerraformDir: "../examples/simple-app",
+    TerraformDir: "../examples/simple-app-mock-db",
 
     // Input varialbe passed to the alb example using -var options
     Vars: map[string]interface{} {
@@ -30,16 +30,16 @@ func TestSimpleAppExample (t *testing.T) {
   }
 
   // Ensure env is destroyed post test run
-  defer terraform.Destroy (t, terraformOptions)
+  defer terraform.Destroy(t, terraformOptions)
 
   // Deploy the example
   terraform.Init(t, terraformOptions)
   terraform.Apply(t, terraformOptions)
 
-  validateSimpleAppExample (t, terraformOptions)
+  validateSimpleAppMockDbExample(t, terraformOptions)
 }
 
-func validateSimpleAppExample (t *testing.T, terraformOptions *terraform.Options) {
+func validateSimpleAppMockDbExample(t *testing.T, terraformOptions *terraform.Options) {
   // Run terraform output to fetch the output variables
   alb_dns_name := terraform.Output(t, terraformOptions, "alb_dns_name")
   alb_dns_name = fmt.Sprintf("http://%s", alb_dns_name)
@@ -47,7 +47,7 @@ func validateSimpleAppExample (t *testing.T, terraformOptions *terraform.Options
   maxRetries := 10
   timeBetweenRetries := 10 * time.Second
 
-  http_helper.HttpGetWithRetryWithCustomValidation (
+  http_helper.HttpGetWithRetryWithCustomValidation(
     t,
     alb_dns_name,
     nil,
