@@ -42,10 +42,4 @@ locals {
       ? data.aws_subnet_ids.default[0].ids
       : var.subnet_ids
     )
-
-  alb_name = (
-    var.alb_name == null
-      ? var.cluster_name
-      : var.alb_name
-    )
 }

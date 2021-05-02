@@ -13,7 +13,7 @@ variable "mysql_config" {
 }
 
 variable "alb_name" {
-  description = "The IDs fo the subnets to deploy into"
+  description = "The name to use for the ALB"
   type = string
-  default = null
+  default = "alb-example"
 }

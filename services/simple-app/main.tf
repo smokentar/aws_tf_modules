@@ -29,7 +29,7 @@ data "template_file" "user_data" {
 module "alb" {
   source = "../../networking/alb"
 
-  alb_name = local.alb_name
+  alb_name = var.alb_name
   subnet_ids = local.subnet_ids
 }
 
