@@ -14,7 +14,7 @@ data "aws_subnet_ids" "default" {
   vpc_id = local.vpc_id
 }
 
-data "terraform _remote_state" "db" {
+data "terraform_remote_state" "db" {
   count = var.mysql_config == null ? 1 : 0
 
   backend = "s3"

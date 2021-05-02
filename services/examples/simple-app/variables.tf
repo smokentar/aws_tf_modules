@@ -6,7 +6,7 @@ variable "mysql_config" {
     port = number
     })
 
-  default {
+  default = {
     endpoint = "example-db"
     port = "12345"
   }

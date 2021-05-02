@@ -6,6 +6,7 @@ import (
   "fmt"
   "testing"
   "time"
+  "strings"
 )
 
 func TestSimpleAppExample (t *testing.T) {
@@ -18,7 +19,7 @@ func TestSimpleAppExample (t *testing.T) {
       "mysql_config": map[string]interface{}{
         "endpoint": "test-db",
         "port": "9999",
-      }
+      },
     },
   }
 
@@ -47,7 +48,7 @@ func validateSimpleAppExample (t *testing.T, terraformOptions *terraform.Options
     maxRetries,
     timeBetweenRetries,
     func (status int, body string) bool {
-      return status = 200 &&
+      return status == 200 &&
         strings.Contains(body, "Ubuntu")
     },
   )
