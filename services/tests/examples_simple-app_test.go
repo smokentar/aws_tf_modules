@@ -3,6 +3,7 @@ package test
 import (
   "github.com/gruntwork-io/terratest/modules/terraform"
   http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
+  "github.com/gruntwork-io/terratest/modules/random"
   "fmt"
   "testing"
   "time"
@@ -11,13 +12,16 @@ import (
 
 func TestSimpleAppExample (t *testing.T) {
 
+  // Unique ID passed to resource names to avoid parallel test clashing
+  uniqueId := random.UniqueId()
+
   terraformOptions := &terraform.Options {
     TerraformDir: "../examples/simple-app",
 
     // Input varialbe passed to the alb example using -var options
     Vars: map[string]interface{} {
       "alb_name": fmt.Sprintf("test-%s", uniqueId),
-      
+
       "mysql_config": map[string]interface{}{
         "endpoint": "test-db",
         "port": "9999",

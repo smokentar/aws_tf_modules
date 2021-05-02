@@ -45,7 +45,7 @@ locals {
 
   alb_name = (
     var.alb_name == null
-      ? "${var.cluster_name}"
+      ? var.cluster_name
       : var.alb_name
     )
 }

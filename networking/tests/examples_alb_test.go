@@ -3,12 +3,16 @@ package test
 import (
   "github.com/gruntwork-io/terratest/modules/terraform"
   http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
+  "github.com/gruntwork-io/terratest/modules/random"
   "fmt"
   "testing"
   "time"
 )
 
 func TestAlbExample (t *testing.T) {
+
+  // Unique ID passed to resource names to avoid parallel test clashing
+  uniqueId := random.UniqueId()
 
   terraformOptions := &terraform.Options {
     TerraformDir: "../examples/alb",
