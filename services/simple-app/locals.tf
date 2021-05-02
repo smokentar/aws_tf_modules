@@ -42,4 +42,10 @@ locals {
       ? data.aws_subnet_ids.default[0].ids
       : var.subnet_ids
     )
+
+  alb_name = (
+    var.alb_name == null
+      ? "simple-app-${var.cluster_name}"
+      : var.alb_name
+    )
 }
