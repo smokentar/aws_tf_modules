@@ -16,6 +16,8 @@ func TestSimpleAppExample (t *testing.T) {
 
     // Input varialbe passed to the alb example using -var options
     Vars: map[string]interface{} {
+      "alb_name": fmt.Sprintf("test-%s", uniqueId),
+      
       "mysql_config": map[string]interface{}{
         "endpoint": "test-db",
         "port": "9999",

@@ -12,6 +12,10 @@ func TestAlbExample (t *testing.T) {
 
   terraformOptions := &terraform.Options {
     TerraformDir: "../examples/alb",
+
+    // Variables to pass to the TF code using -var options
+    Vars: map[string]interface{} {
+      "alb_name": fmt.Sprintf("test-%s", uniqueId),
   }
 
   // Ensure env is destroyed post test run

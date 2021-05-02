@@ -68,3 +68,9 @@ variable "mysql_config" {
   })
   default = null
 }
+
+variable "alb_name" {
+  description = "The IDs fo the subnets to deploy into"
+  type = string
+  default = null
+}
