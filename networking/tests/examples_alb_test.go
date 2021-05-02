@@ -20,7 +20,8 @@ func TestAlbExample (t *testing.T) {
     // Variables to pass to the TF code using -var options
     Vars: map[string]interface{} {
       "alb_name": fmt.Sprintf("test-%s", uniqueId),
-  }
+  },
+}
 
   // Ensure env is destroyed post test run
   defer terraform.Destroy (t, terraformOptions)

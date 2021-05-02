@@ -3,7 +3,10 @@ provider "aws" {
 }
 
 module "mysql" {
-  source = "../../mysql"
+  source = "../../data_stores/mysql"
+
+  db_username = var.db_username
+  db_password = var.db_password
 
   db_instance_environment = "testing"
 
