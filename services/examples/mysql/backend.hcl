@@ -5,5 +5,4 @@
 bucket = "examples-terraform-state"
 key = "services/examples/mysql/terraform.tfstate"
 region = "us-east-1"
-dynamodb_table = "tfstate-locks"
 encrypt = true

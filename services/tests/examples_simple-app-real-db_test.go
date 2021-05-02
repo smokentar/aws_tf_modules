@@ -31,7 +31,7 @@ func TestSimpleAppRealDbExample(t *testing.T) {
   validateSimpleAppRealDbExample(t, appOptions)
 }
 
-func createDbOptions(t *testing.T, terraformDir string) *terraformOptions {
+func createDbOptions(t *testing.T, terraformDir string) *terraform.Options {
   uniqueId := random.UniqueId()
 
   bucketForTesting := "temp-automated-testing-bucket"
@@ -55,7 +55,7 @@ func createDbOptions(t *testing.T, terraformDir string) *terraformOptions {
   }
 }
 
-func createAppOptions(dbOptions *terraform.Options, terraformDir string) *TerraformOptions {
+func createAppOptions(dbOptions *terraform.Options, terraformDir string) *terraform.Options {
   return &terraform.Options {
     TerraformDir: terraformDir,
 
@@ -68,7 +68,7 @@ func createAppOptions(dbOptions *terraform.Options, terraformDir string) *Terraf
 
 func validateSimpleAppRealDbExample(t *testing.T, appOptions *terraform.Options) {
   // Run terraform output to fetch the output variables
-  alb_dns_name := terraform.Output(t, terraformOptions, "alb_dns_name")
+  alb_dns_name := terraform.Output(t, appOptions, "alb_dns_name")
   alb_dns_name = fmt.Sprintf("http://%s", alb_dns_name)
 
   maxRetries := 10
