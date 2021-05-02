@@ -1,21 +1,3 @@
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
-}
-
-data "terraform_remote_state" "db" {
-  backend = "s3"
-
-  config = {
-    bucket = var.db_remote_state_bucket
-    key = var.db_remote_state_key
-    region = "us-east-1"
-  }
-}
-
 module "asg" {
   source = "../../clustering/asg-rolling-deploy"
 
@@ -28,7 +10,7 @@ module "asg" {
   max_size_asg = var.max_size_asg
   scheduled_actions = var.scheduled_actions
 
-  subnet_ids = data.aws_subnet_ids.default.ids
+  subnet_ids = local.subnet_ids
   target_group_arns = [aws_lb_target_group.alb_tg.arn]
   health_check_type = "ELB"
 
@@ -39,8 +21,8 @@ data "template_file" "user_data" {
   template = file("${path.module}/user-data.sh")
   vars = {
     user_data_server_port = local.http_port_non_privilege
-    db_address = data.terraform_remote_state.db.outputs.mysql_export.endpoint
-    db_port = data.terraform_remote_state.db.outputs.mysql_export.port
+    db_address = local.mysql_config.endpoint #data.terraform_remote_state.db.outputs.mysql_export.endpoint
+    db_port = local.mysql_config.port #data.terraform_remote_state.db.outputs.mysql_export.port
   }
 }
 
@@ -48,7 +30,7 @@ module "alb" {
   source = "../../networking/alb"
 
   alb_name = "simple-app-${var.cluster_name}"
-  subnet_ids = data.aws_subnet_ids.default.ids
+  subnet_ids = local.subnet_ids
 }
 
 resource "aws_lb_listener_rule" "http_forward_tg" {
@@ -71,7 +53,7 @@ resource "aws_lb_target_group" "alb_tg" {
   name = "simple-app-${var.cluster_name}"
   port = local.http_port_non_privilege
   protocol = local.http_protocol
-  vpc_id = data.aws_vpc.default.id
+  vpc_id = local.vpc_id
 
   health_check {
     path = "/"
