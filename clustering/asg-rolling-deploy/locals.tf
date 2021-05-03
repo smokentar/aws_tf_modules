@@ -2,7 +2,7 @@ locals {
 
   # Ports
   http_port_non_privilege = 8080
-  any_port = 0
+  any_port                = 0
 
   # Protocols
   any_protocol = "-1"
@@ -14,6 +14,6 @@ locals {
   # Standardised tags which are required
   standard_tags = {
     Name = var.cluster_name
-    IAC = "terraform"
+    IAC  = "terraform"
   }
 }

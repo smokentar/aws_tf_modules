@@ -13,6 +13,6 @@ data "aws_subnet_ids" "default" {
 module "alb" {
   source = "../../alb"
 
-  alb_name = var.alb_name
+  alb_name   = var.alb_name
   subnet_ids = data.aws_subnet_ids.default.ids
 }
