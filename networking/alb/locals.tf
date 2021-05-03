@@ -2,12 +2,12 @@ locals {
 
   # Ports
   http_port = 80
-  ssh_port = 22
-  any_port = 0
+  ssh_port  = 22
+  any_port  = 0
 
   # Protocols
-  any_protocol = "-1"
-  tcp_protocol = "tcp"
+  any_protocol  = "-1"
+  tcp_protocol  = "tcp"
   http_protocol = "HTTP"
 
   # CIDR ranges

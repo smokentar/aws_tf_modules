@@ -21,11 +21,11 @@ module "asg-example" {
   source = "../../asg-rolling-deploy"
 
   cluster_name = "asg-example"
-  live_ami = "ami-013f17f36f8b1fefb"
+  live_ami     = "ami-013f17f36f8b1fefb"
 
-  min_size_asg = 2
-  max_size_asg = 2
-  instance_type  = "t2.micro"
+  min_size_asg  = 2
+  max_size_asg  = 2
+  instance_type = "t2.micro"
 
   scheduled_actions = false
 
@@ -33,6 +33,6 @@ module "asg-example" {
 
   custom_tags = {
     Environment = "example"
-    Type = "immutable"
+    Type        = "immutable"
   }
 }
